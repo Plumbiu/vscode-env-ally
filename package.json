@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:**/.env*"
+    "workspaceContains:.env*"
   ],
   "main": "./dist/index.js",
   "contributes": {
