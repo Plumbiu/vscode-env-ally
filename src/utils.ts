@@ -4,8 +4,10 @@ import { pathToFileURL } from 'node:url'
 import { MarkdownString, workspace } from 'vscode'
 import { parse as envParse } from 'dotenv'
 import { Env, EnvValue } from './types'
+import { EnvReg } from './constant'
 
 export function updateEnv(env: Env) {
+  // TODO: fast-glob is better?
   workspace.findFiles('**/.env*', '**/node_modules/**').then((filesPath) => {
     for (const fsPath of filesPath.map(({ fsPath }) => fsPath)) {
       fs.readFile(fsPath, (_err, envBuf) => {
@@ -25,7 +27,8 @@ export function updateEnv(env: Env) {
 }
 
 export function lastProp(str: string) {
-  return str.slice(str.lastIndexOf('.') + 1)
+  const [_, s] = EnvReg.exec(str) ?? ['', '']
+  return s
 }
 
 export function genEnvMarkdown(envValues: EnvValue[], title: string) {

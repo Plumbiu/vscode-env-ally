@@ -6,12 +6,14 @@ import {
   window,
 } from 'vscode'
 import type { Env } from './types'
-import { updateEnv, genEnvMarkdown, isEnvFile, lastProp } from './utils'
+import { updateEnv, genEnvMarkdown, lastProp, isEnvFile } from './utils'
+import { EnvReg } from './constant'
 
 export function activate(ctx: ExtensionContext) {
   let env: Env = {}
-  let fromEnv = false
   updateEnv(env)
+  let fromEnv = false
+  // TODO: use workspace.createFileSystemWatcher
   window.onDidChangeActiveTextEditor((e) => {
     const fileName = e?.document.fileName
     if (!fileName) {
@@ -25,7 +27,6 @@ export function activate(ctx: ExtensionContext) {
       fromEnv = false
     }
   })
-  // TODO: reduce the code
   workspace.onDidSaveTextDocument((e) => {
     if (isEnvFile(e.fileName)) {
       // FIXME: it works, but weird
@@ -58,12 +59,9 @@ export function activate(ctx: ExtensionContext) {
     updateEnv(env)
   })
   // TODO: More language support
-  languages.registerHoverProvider(['javascript', 'typescrript'], {
+  languages.registerHoverProvider(['javascript', 'typescript'], {
     provideHover(document, position) {
-      const range = document.getWordRangeAtPosition(
-        position,
-        /process.env.*|import.meta.env.*/,
-      )
+      const range = document.getWordRangeAtPosition(position, EnvReg)
       const prop = lastProp(document.getText(range))
       const hoverContent = genEnvMarkdown(env[prop], prop)
       return new Hover(hoverContent)

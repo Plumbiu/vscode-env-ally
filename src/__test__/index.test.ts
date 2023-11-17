@@ -3,6 +3,9 @@ import { lastProp } from '../utils'
 
 test('lastProp', () => {
   expect(lastProp('import.env.foo')).toBe('foo')
+  expect(lastProp('console.log(import.env.foo)')).toBe('foo')
+  expect(lastProp('console.log(import.env.foo);')).toBe('foo')
+  expect(lastProp('if (import.env.foo === "hello")')).toBe('foo')
   expect(lastProp('import.env')).toBe('env')
 })
 
