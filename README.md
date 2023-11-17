@@ -14,4 +14,4 @@ Hover in the `process.env.*` or `import.meta.env.*`(for vite) code.
 
 ## Todo
 
-- [] support more language
+- [ ] support more language
