@@ -31,11 +31,11 @@
   },
   "devDependencies": {
     "@plumbiu/eslint-config": "^0.1.10",
-    "@types/node": "18.x",
-    "@types/vscode": "^1.84.0",
-    "eslint": "^8.52.0",
+    "@types/node": "~20.9.1",
+    "@types/vscode": "^1.84.1",
+    "eslint": "^8.53.0",
     "esno": "^4.0.0",
-    "tsup": "^7.2.0",
+    "tsup": "^7.3.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
   },
