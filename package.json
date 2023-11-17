@@ -17,12 +17,7 @@
   ],
   "main": "./dist/index.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "vscode-env-config.helloWorld",
-        "title": "Hello World"
-      }
-    ]
+    "commands": []
   },
   "scripts": {
     "vscode:prepublish": "pnpm run build",
