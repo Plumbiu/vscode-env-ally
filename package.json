@@ -6,8 +6,11 @@
   "engines": {
     "vscode": "^1.84.0"
   },
+  "publisher": "plumbiu",
   "categories": [
-    "Other"
+    "Debuggers",
+    "Programming Languages",
+    "Visualization"
   ],
   "activationEvents": [
     "workspaceContains:.env*"
@@ -26,6 +29,10 @@
     "build": "tsup src/index.ts --external vscode",
     "dev": "pnpm build --watch src",
     "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Plumbiu/vscode-env-ally"
   },
   "devDependencies": {
     "@plumbiu/eslint-config": "^0.1.10",
