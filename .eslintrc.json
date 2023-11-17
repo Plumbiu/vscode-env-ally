@@ -1,0 +1,9 @@
+{
+  "extends": "@plumbiu",
+  "rules": {
+    "import/no-unresolved": 0,
+    "@stylistic/indent": 0,
+    "@stylistic/function-paren-newline": 0,
+    "@stylistic/implicit-arrow-linebreak": 0
+  }
+}
