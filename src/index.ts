@@ -6,12 +6,12 @@ import {
   window,
 } from 'vscode'
 import type { Env } from './types'
-import { resolveEnv, genEnvMarkdown, isEnvFile, lastProp } from './utils'
+import { updateEnv, genEnvMarkdown, isEnvFile, lastProp } from './utils'
 
 export function activate(ctx: ExtensionContext) {
   let env: Env = {}
   let fromEnv = false
-  resolveEnv(env)
+  updateEnv(env)
   window.onDidChangeActiveTextEditor((e) => {
     const fileName = e?.document.fileName
     if (!fileName) {
@@ -21,7 +21,7 @@ export function activate(ctx: ExtensionContext) {
       fromEnv = true
     } else if (fromEnv) {
       env = {}
-      resolveEnv(env)
+      updateEnv(env)
       fromEnv = false
     }
   })
@@ -30,7 +30,7 @@ export function activate(ctx: ExtensionContext) {
     if (isEnvFile(e.fileName)) {
       // FIXME: it works, but weird
       env = {}
-      resolveEnv(env)
+      updateEnv(env)
     }
   })
   workspace.onDidRenameFiles((e) => {
@@ -39,7 +39,7 @@ export function activate(ctx: ExtensionContext) {
       return
     }
     env = {}
-    resolveEnv(env)
+    updateEnv(env)
   })
   workspace.onDidCreateFiles((e) => {
     const files = e.files.filter(({ fsPath }) => isEnvFile(fsPath))
@@ -47,7 +47,7 @@ export function activate(ctx: ExtensionContext) {
       return
     }
     env = {}
-    resolveEnv(env)
+    updateEnv(env)
   })
   workspace.onDidDeleteFiles((e) => {
     const files = e.files.filter(({ fsPath }) => isEnvFile(fsPath))
@@ -55,7 +55,7 @@ export function activate(ctx: ExtensionContext) {
       return
     }
     env = {}
-    resolveEnv(env)
+    updateEnv(env)
   })
   // TODO: More language support
   languages.registerHoverProvider(['javascript', 'typescrript'], {

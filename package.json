@@ -2,7 +2,7 @@
   "name": "vscode-env-ally",
   "displayName": "Env Ally",
   "description": "Display .env.* file config in your code.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.84.0"
   },
@@ -13,7 +13,7 @@
     "Visualization"
   ],
   "activationEvents": [
-    "workspaceContains:.env*"
+    "workspaceContains:**/.env*"
   ],
   "main": "./dist/index.js",
   "contributes": {

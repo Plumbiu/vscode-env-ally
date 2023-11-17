@@ -5,8 +5,8 @@ import { MarkdownString, workspace } from 'vscode'
 import { parse as envParse } from 'dotenv'
 import { Env, EnvValue } from './types'
 
-export function resolveEnv(env: Env) {
-  workspace.findFiles('.env*', '**/node_modules/**').then((filesPath) => {
+export function updateEnv(env: Env) {
+  workspace.findFiles('**/.env*', '**/node_modules/**').then((filesPath) => {
     for (const fsPath of filesPath.map(({ fsPath }) => fsPath)) {
       fs.readFile(fsPath, (_err, envBuf) => {
         for (const [key, value] of Object.entries(envParse(envBuf))) {
