@@ -29,27 +29,25 @@ export function resolveEnv(rawEnv: RawEnv) {
   return env
 }
 
-export function initEnv(workspaces: string[]) {
+export function initEnv(cwd: string) {
   const rawEnv: RawEnv = {}
   const wather: FileSystemWatcher[] = []
   // TODO: fast-glob or workspace.findFiles?
-  for (const rootPath of workspaces) {
-    const globPaths = globSync('**/.env*', {
-      ignore: ignorePattern,
-      cwd: rootPath,
-      absolute: true,
-    })
-    for (const envPath of globPaths) {
-      wather.push(
-        workspace.createFileSystemWatcher(
-          new RelativePattern(path.dirname(envPath), '.env*'),
-          false,
-          true,
-          false,
-        ),
-      )
-      rawEnv[path.normalize(envPath)] = readEnv(envPath)
-    }
+  const globPaths = globSync('**/.env*', {
+    ignore: ignorePattern,
+    cwd,
+    absolute: true,
+  })
+  for (const envPath of globPaths) {
+    wather.push(
+      workspace.createFileSystemWatcher(
+        new RelativePattern(path.dirname(envPath), '.env*'),
+        false,
+        true,
+        false,
+      ),
+    )
+    rawEnv[path.normalize(envPath)] = readEnv(envPath)
   }
 
   return {
