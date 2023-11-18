@@ -61,7 +61,7 @@ export function readEnv(envPath: string) {
   return envParse(envBuf)
 }
 
-export function genEnvMarkdown(envValues: EnvValue[], title: string) {
+export function genEnvMarkdown(envValues: EnvValue[], title?: string,) {
   const md = new MarkdownString(title)
   for (const { path, name, value } of envValues) {
     md.appendMarkdown(`
@@ -70,5 +70,5 @@ export function genEnvMarkdown(envValues: EnvValue[], title: string) {
 `)
   }
 
-  return md.value
+  return md
 }

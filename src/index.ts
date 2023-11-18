@@ -5,6 +5,7 @@ import {
   Hover,
   workspace,
   CompletionItemKind,
+  CompletionItem,
 } from 'vscode'
 import { findProp, isEnvFile } from './utils'
 import { completionTrigger, langs, rulePrefix, rules } from './constant'
@@ -42,10 +43,12 @@ export function activate(ctx: ExtensionContext) {
         if (!rulePrefix[languageId].test(linePrefix)) {
           return
         }
+        CompletionItem
         return Object.entries(env).map(([key, item]) => {
           return {
             label: key,
-            detail: item.map(({ value }) => value).join('\n'),
+            detail: key,
+            documentation: genEnvMarkdown(item),
             kind: CompletionItemKind.Variable,
           }
         })
