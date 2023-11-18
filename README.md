@@ -8,7 +8,7 @@
 
 serach `Env Ally` in vscode marketplace,
 
-## Features
+## Feature
 
 - support javascript, typescript, python, go ...(see [dotenv/quickstart](https://www.dotenv.org/docs/quickstart) support)
 
