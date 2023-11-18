@@ -5,11 +5,11 @@ import { langs, rules } from './constant'
 import { genEnvMarkdown, initEnv, readEnv, resolveEnv } from './utils/vscode'
 
 export function activate(ctx: ExtensionContext) {
-  const workspaces = workspace.workspaceFolders?.map(({ uri }) => uri.fsPath)
-  if (!workspaces) {
+  const cwd = workspace.workspaceFolders?.[0].uri.fsPath
+  if (!cwd) {
     return
   }
-  const { rawEnv, wather } = initEnv(workspaces)
+  const { rawEnv, wather } = initEnv(cwd)
   let env = resolveEnv(rawEnv)
   for (const w of wather) {
     // `onDidChange` API need debounce, we can use workspace.onDidSaveTextDocument to achieve it.
