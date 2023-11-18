@@ -21,6 +21,7 @@
     "rust"
   ],
   "publisher": "plumbiu",
+  "packageManager": "pnpm@8.10.5",
   "categories": [
     "Debuggers",
     "Programming Languages",
