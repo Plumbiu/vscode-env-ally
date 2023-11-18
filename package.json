@@ -1,11 +1,25 @@
 {
   "name": "vscode-env-ally",
   "displayName": "Env Ally",
-  "description": "Display .env.* file config in your code.",
-  "version": "0.0.5",
+  "description": "Dotenv extension to display the env data by hover",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.84.0"
   },
+  "keywords": [
+    "dotenv",
+    "env",
+    "io",
+    "hover",
+    "vscode",
+    "nodejs",
+    "python",
+    "go",
+    "golang",
+    "ruby",
+    "php",
+    "rust"
+  ],
   "publisher": "plumbiu",
   "categories": [
     "Debuggers",
@@ -13,7 +27,7 @@
     "Visualization"
   ],
   "activationEvents": [
-    "workspaceContains:package.json"
+    "workspaceContains:**/.env*"
   ],
   "main": "./dist/index.js",
   "contributes": {
