@@ -1,8 +1,8 @@
 {
   "name": "vscode-env-ally",
   "displayName": "Env Ally",
-  "description": "Dotenv extension to display the env data by hover",
-  "version": "0.1.1",
+  "description": "Dotenv extension to display the env data.",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.84.0"
   },
