@@ -1,7 +1,13 @@
 import path from 'path'
-import { type ExtensionContext, languages, Hover, workspace } from 'vscode'
+import {
+  type ExtensionContext,
+  languages,
+  Hover,
+  workspace,
+  CompletionItemKind,
+} from 'vscode'
 import { findProp, isEnvFile } from './utils'
-import { langs, rules } from './constant'
+import { completionTrigger, langs, rulePrefix, rules } from './constant'
 import { genEnvMarkdown, initEnv, readEnv, resolveEnv } from './utils/vscode'
 
 export function activate(ctx: ExtensionContext) {
@@ -28,6 +34,25 @@ export function activate(ctx: ExtensionContext) {
       env = resolveEnv(rawEnv)
     }
   })
+  languages.registerCompletionItemProvider(
+    langs,
+    {
+      provideCompletionItems({ lineAt, languageId }, position) {
+        const linePrefix = lineAt(position).text.slice(0, position.character)
+        if (!rulePrefix[languageId].test(linePrefix)) {
+          return
+        }
+        return Object.entries(env).map(([key, item]) => {
+          return {
+            label: key,
+            detail: item.map(({ value }) => value).join('\n'),
+            kind: CompletionItemKind.Variable,
+          }
+        })
+      },
+    },
+    ...completionTrigger,
+  )
   languages.registerHoverProvider(langs, {
     provideHover({ languageId, getText, getWordRangeAtPosition }, position) {
       const prop = findProp(

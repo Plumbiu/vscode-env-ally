@@ -1,5 +1,22 @@
 /* eslint-disable @stylistic/quotes */
 
+export const rulePrefix: Record<string, RegExp> = {
+  javascript: /(process|import\??.meta\??)\??.env\\??./,
+  typescript: /(process|import\??.meta\??)\??.env\\??./,
+  javascriptreact: /(process|import\??.meta\??)\??.env\\??./,
+  typescriptreact: /(process|import\??.meta\??)\??.env\\??./,
+  vue: /import\??.meta\??.env\\??./,
+  astro: /import\??.meta\??.env\\??./,
+  svelte: /import\??.meta\??.env\\??./,
+  python: /os.getenv\(["']/,
+  ruby: /os.getenv\(["']/,
+  go: /os.Getenv\("/,
+  php: /\{\$_SERVER\['/,
+  rust: /std::env::var\("/,
+}
+
+export const completionTrigger = ['.', '[', '(', '"', "'"]
+
 export const rules: Record<string, RegExp> = {
   javascript: /(process|import\??.meta\??)\??.env\??.([\w]+)/,
   typescript: /(process|import\??.meta\??)\??.env\??.([\w]+)/,
