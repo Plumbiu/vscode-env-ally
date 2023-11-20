@@ -7,7 +7,7 @@ export function isEnvFile(file: string) {
 export function findProp(str: string, lang: string) {
   const result = rules[lang]?.exec(str)
   if (!result) {
-    return ''
+    return undefined
   }
   return result[result.length - 1]
 }

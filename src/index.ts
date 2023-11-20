@@ -62,6 +62,9 @@ export function activate(ctx: ExtensionContext) {
         getText(getWordRangeAtPosition(position, rules[languageId])),
         languageId,
       )
+      if (!prop) {
+        return
+      }
       return new Hover(genEnvMarkdown(env[prop], prop))
     },
   })
