@@ -2,7 +2,7 @@
   "name": "vscode-env-ally",
   "displayName": "Env Ally",
   "description": "Dotenv extension to display the env data.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "engines": {
     "vscode": "^1.84.0"
   },
@@ -47,13 +47,13 @@
   },
   "devDependencies": {
     "@plumbiu/eslint-config": "^0.1.10",
-    "@types/node": "~20.9.1",
+    "@types/node": "~20.9.2",
     "@types/vscode": "^1.84.1",
-    "eslint": "^8.53.0",
-    "tsup": "^7.3.0",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6",
     "dotenv": "^16.3.1",
-    "fast-glob": "^3.3.2"
+    "eslint": "^8.54.0",
+    "fast-glob": "^3.3.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }
