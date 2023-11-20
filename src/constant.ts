@@ -34,13 +34,4 @@ export const rules: Record<string, RegExp> = {
 
 export const langs = Object.keys(rules)
 
-export const ignorePattern = [
-  '**/node_modules/**',
-  '**/.vscode/**',
-  '**/.git/**',
-  '**/dist/**',
-  '**/.vscode-test/**',
-  '**/*.vsix/**',
-  '**/.idea/**',
-  '**/.DS_Store/**',
-]
+export const ignorePattern = ['**/node_modules/**', '**/dist/**']

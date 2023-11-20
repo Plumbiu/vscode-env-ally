@@ -57,11 +57,8 @@ export function activate(ctx: ExtensionContext) {
     ...completionTrigger,
   )
   languages.registerHoverProvider(langs, {
-    provideHover({ languageId, getText, getWordRangeAtPosition }, position) {
-      const prop = findProp(
-        getText(getWordRangeAtPosition(position, rules[languageId])),
-        languageId,
-      )
+    provideHover({ languageId, lineAt }, position) {
+      const prop = findProp(lineAt(position).text.slice(0), languageId)
       if (!prop) {
         return
       }
