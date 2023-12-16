@@ -1,7 +1,7 @@
-import fs from 'node:fs'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { globSync } from 'fast-glob'
+import { glob } from 'fast-glob'
 import {
   FileSystemWatcher,
   workspace,
@@ -29,11 +29,11 @@ export function resolveEnv(rawEnv: RawEnv) {
   return env
 }
 
-export function initEnv(cwd: string) {
+export async function initEnv(cwd: string) {
   const rawEnv: RawEnv = {}
   const wather: FileSystemWatcher[] = []
   // TODO: fast-glob or workspace.findFiles?
-  const globPaths = globSync('**/.env*', {
+  const globPaths = await glob('**/.env*', {
     ignore: ignorePattern,
     cwd,
     absolute: true,
@@ -47,7 +47,7 @@ export function initEnv(cwd: string) {
         false,
       ),
     )
-    rawEnv[path.normalize(envPath)] = readEnv(envPath)
+    rawEnv[path.normalize(envPath)] = await readEnv(envPath)
   }
 
   return {
@@ -56,8 +56,8 @@ export function initEnv(cwd: string) {
   }
 }
 
-export function readEnv(envPath: string) {
-  const envBuf = fs.readFileSync(envPath)
+export async function readEnv(envPath: string) {
+  const envBuf = await fs.readFile(envPath)
   return envParse(envBuf)
 }
 

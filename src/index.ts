@@ -8,20 +8,20 @@ import {
   CompletionItem,
 } from 'vscode'
 import { findProp, isEnvFile } from './utils'
-import { completionTrigger, langs, rulePrefix, rules } from './constant'
+import { completionTrigger, langs, rulePrefix } from './constant'
 import { genEnvMarkdown, initEnv, readEnv, resolveEnv } from './utils/vscode'
 
-export function activate(ctx: ExtensionContext) {
+export async function activate(ctx: ExtensionContext) {
   const cwd = workspace.workspaceFolders?.[0].uri.fsPath
   if (!cwd) {
     return
   }
-  const { rawEnv, wather } = initEnv(cwd)
+  const { rawEnv, wather } = await initEnv(cwd)
   let env = resolveEnv(rawEnv)
   for (const w of wather) {
     // `onDidChange` API need debounce, we can use workspace.onDidSaveTextDocument to achieve it.
-    w.onDidCreate((e) => {
-      rawEnv[path.normalize(e.fsPath)] = readEnv(e.fsPath)
+    w.onDidCreate(async (e) => {
+      rawEnv[path.normalize(e.fsPath)] = await readEnv(e.fsPath)
       env = resolveEnv(rawEnv)
     })
     w.onDidDelete((e) => {
@@ -29,9 +29,9 @@ export function activate(ctx: ExtensionContext) {
       env = resolveEnv(rawEnv)
     })
   }
-  workspace.onDidSaveTextDocument(({ fileName }) => {
+  workspace.onDidSaveTextDocument(async ({ fileName }) => {
     if (isEnvFile(fileName)) {
-      rawEnv[path.normalize(fileName)] = readEnv(fileName)
+      rawEnv[path.normalize(fileName)] = await readEnv(fileName)
       env = resolveEnv(rawEnv)
     }
   })
@@ -43,7 +43,6 @@ export function activate(ctx: ExtensionContext) {
         if (!rulePrefix[languageId].test(linePrefix)) {
           return
         }
-        CompletionItem
         return Object.entries(env).map(([key, item]) => {
           return {
             label: key,
