@@ -29,7 +29,7 @@
     "Visualization"
   ],
   "activationEvents": [
-    "workspaceContains:**/.env*"
+    "workspaceContains:.env*"
   ],
   "main": "./dist/index.cjs",
   "contributes": {
