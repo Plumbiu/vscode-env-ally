@@ -20,9 +20,9 @@ devDependencies:
   eslint:
     specifier: ^8.56.0
     version: 8.56.0
-  fast-glob:
-    specifier: ^3.3.2
-    version: 3.3.2
+  tiny-fast-glob:
+    specifier: ^0.1.2
+    version: 0.1.2
   tsup:
     specifier: ^8.0.1
     version: 8.0.1(typescript@5.3.3)
@@ -2542,6 +2542,12 @@ packages:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
     dependencies:
       any-promise: 1.3.0
+    dev: true
+
+  /tiny-fast-glob@0.1.2:
+    resolution: {integrity: sha512-dFKgIJy3fogBpc5iLMkg9o9N7D5gZ5qQB3TEb7oRK9jUiS25rz/42yR9nim/JlLDQ+xkwBa8ize9z0zcYNxNFg==}
+    dependencies:
+      micromatch: 4.0.5
     dev: true
 
   /tinybench@2.5.1:

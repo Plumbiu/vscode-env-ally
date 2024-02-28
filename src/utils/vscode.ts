@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { glob } from 'fast-glob'
+import { glob } from 'tiny-fast-glob'
 import {
   FileSystemWatcher,
   workspace,
@@ -9,8 +9,8 @@ import {
   MarkdownString,
 } from 'vscode'
 import { parse as envParse } from 'dotenv'
-import { ignorePattern } from '../constant'
-import { RawEnv, Env, EnvValue } from '../types'
+import { ignorePattern } from '../constant.js'
+import { RawEnv, Env, EnvValue } from '../types.js'
 
 export function resolveEnv(rawEnv: RawEnv) {
   const env: Env = {}
@@ -32,7 +32,6 @@ export function resolveEnv(rawEnv: RawEnv) {
 export async function initEnv(cwd: string) {
   const rawEnv: RawEnv = {}
   const wather: FileSystemWatcher[] = []
-  // TODO: fast-glob or workspace.findFiles?
   const globPaths = await glob('**/.env*', {
     ignore: ignorePattern,
     cwd,

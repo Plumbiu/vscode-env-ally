@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "Node16",
+    "module": "NodeNext",
     "target": "ES6",
     "outDir": "dist",
     "lib": ["ES2022"],
