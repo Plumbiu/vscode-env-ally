@@ -37,17 +37,20 @@ export async function initEnv(cwd: string) {
     cwd,
     absolute: true,
   })
-  for (const envPath of globPaths) {
-    wather.push(
-      workspace.createFileSystemWatcher(
-        new RelativePattern(path.dirname(envPath), '.env*'),
-        false,
-        true,
-        false,
-      ),
-    )
-    rawEnv[path.normalize(envPath)] = await readEnv(envPath)
-  }
+
+  await Promise.all(
+    globPaths.map(async (envPath) => {
+      wather.push(
+        workspace.createFileSystemWatcher(
+          new RelativePattern(path.dirname(envPath), '.env*'),
+          false,
+          true,
+          false,
+        ),
+      )
+      rawEnv[path.normalize(envPath)] = await readEnv(envPath)
+    }),
+  )
 
   return {
     rawEnv,
