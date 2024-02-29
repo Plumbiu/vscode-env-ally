@@ -2,7 +2,7 @@
   "name": "vscode-env-ally",
   "displayName": "Env Ally",
   "description": "Dotenv extension to display the env data.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "type": "module",
   "engines": {
     "vscode": "^1.85.0"
